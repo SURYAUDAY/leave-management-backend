@@ -5,11 +5,9 @@ const { Pool } = require('pg');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
+
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production'
-    ? 'https://leave-management-frontend.onrender.com/'
-    : 'http://localhost:5173',
-  credentials: true
+  origin: ['https://leave-management-frontend.onrender.com', 'http://localhost:5173'], // Add allowed origins here
 };
 
 app.use(cors(corsOptions));
