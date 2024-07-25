@@ -2,19 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'calendar',
-  password: 'Qwerty123',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const testDbConnection = async () => {
@@ -86,7 +86,6 @@ app.put('/events/:id', async (req, res) => {
   }
 });
 
-// Route to delete an event by ID
 app.delete('/events/:id', async (req, res) => {
   const eventId = req.params.id;
   const client = await pool.connect();
