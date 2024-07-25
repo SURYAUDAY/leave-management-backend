@@ -14,10 +14,8 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
-const isProduction = process.env.NODE_ENV === 'production';
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: isProduction ? { rejectUnauthorized: false } : false
 });
 
 const testDbConnection = async () => {
