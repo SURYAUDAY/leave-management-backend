@@ -6,8 +6,15 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? 'https://leave-management-frontend.onrender.com/'
+    : 'http://localhost:5173',
+  credentials: true
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 
 const isProduction = process.env.NODE_ENV === 'production';
