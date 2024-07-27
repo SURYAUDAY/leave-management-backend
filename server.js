@@ -12,7 +12,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
