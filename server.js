@@ -16,6 +16,9 @@ app.use(bodyParser.json());
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // Allow self-signed certificates
+  }
 });
 
 const testDbConnection = async () => {
