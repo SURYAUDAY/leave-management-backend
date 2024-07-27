@@ -119,17 +119,18 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: ['https://leave-management-frontend.onrender.com', 'http://localhost:5173'], // Add allowed origins here
+  origin: ['https://leave-management-frontend-tau.vercel.app', 'http://localhost:5173'], // Add allowed origins here
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false // Allow self-signed certificates
-  }
+  host: "aws-0-ap-south-1.pooler.supabase.com",
+  port: 6543,
+  user: "postgres.tpxclunnrdvhdexwmbkv",
+  password: process.env.DB_PASSWORD,
+  database: "postgres",
 });
 
 const testDbConnection = async () => {
